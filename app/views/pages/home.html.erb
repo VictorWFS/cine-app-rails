@@ -1,0 +1,14 @@
+<h1>Bem vindo ao MeuCineApp</h1>
+<% if user_signed_in? %>        
+    <p>
+        Olá, <strong><%= current_user.email%> </strong>
+    </P>
+
+    <%= button_to "Sair (Logout)", destroy_user_session_path, method: :delete %>
+<% else %>
+  <p>Você não está logado.</p>
+
+  <%= link_to "Registrar", new_user_registration_path %>
+  |
+  <%= link_to "Entrar (Login)", new_user_session_path %>
+<% end %>
