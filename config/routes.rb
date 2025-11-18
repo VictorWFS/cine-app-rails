@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :movies
+  resources :movies do
+    resources :reviews, only: [:create]
+  end
+  
   root "pages#home"
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

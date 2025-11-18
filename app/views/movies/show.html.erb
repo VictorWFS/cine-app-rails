@@ -4,6 +4,40 @@
 
 <div>
   <%= link_to "Edit this movie", edit_movie_path(@movie) %> |
+  <hr>
+  <h3>Críticas</h3>
+
+  <div id="reviews">
+    <% @movie.reviews.where.not(id: nil).each do |review| %>
+      <div class="review">
+        <p>
+          <strong><%= review.user.email %></strong> escreveu:
+          <em>(<%= review.rating %> / 5)</em>
+        </p>
+        <p><%= review.comment %></p>
+      </div>
+      <hr>
+    <% end %>
+  </div>
+
+
+  <h4>Adicionar sua crítica:</h4>
+
+  <%= form_with(model: [@movie, @review]) do |form| %>
+    <div>
+      <%= form.label :rating, "Nota (1-5)" %>
+      <%= form.number_field :rating, min: 1, max: 5 %>
+    </div>
+
+    <div>
+      <%= form.label :comment, "Comentário" %>
+      <%= form.text_area :comment, rows: 5 %>
+    </div>
+
+    <div>
+      <%= form.submit "Salvar Crítica" %>
+    </div>
+  <% end %>
   <%= link_to "Back to movies", movies_path %>
 
   <%= button_to "Destroy this movie", @movie, method: :delete %>

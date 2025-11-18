@@ -10,11 +10,13 @@ class MoviesController < ApplicationController
 
   # GET /movies/1 or /movies/1.json
   def show
+    @review = @movie.reviews.build
   end
 
   # GET /movies/new
   def new
     @movie = Movie.new
+    @review = @movie.reviews.build
   end
 
   # GET /movies/1/edit
